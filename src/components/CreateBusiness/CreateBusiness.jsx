@@ -10,9 +10,11 @@ const CreateBusiness = () => {
   } = useForm();
 
   const onSubmit =async (data) => {
-    const image = data.image[0]; // Get the uploaded image
+    // const image = data.image[0]; // Get the uploaded image
     const formData = new FormData();
-    formData.append("image", image);
+    formData.append("image", data.image[0]);
+ 
+    console.log(formData);
   
     const businessData = {
       name: data.name,
@@ -23,7 +25,7 @@ const CreateBusiness = () => {
       city: data.city,
       street: data.street,
       post_code: data.post_code,
-      logo: formData, // Pass formData directly
+      //  logo: formData, // Pass formData directly
     };
   
     console.log("business", businessData);
@@ -35,7 +37,6 @@ const CreateBusiness = () => {
         {
           headers: {
             Authorization: `Bearer ${storedToken}`,
-            // Set content type to multipart/form-data
             "Content-Type": "multipart/form-data",
           },
         }
@@ -44,9 +45,11 @@ const CreateBusiness = () => {
     } catch (error) {
       console.log(error);
     }
-    // console.log(data)
+    console.log(data)
 
 }
+
+
 
 //   console.log(watch("example"))
 
@@ -60,7 +63,8 @@ const CreateBusiness = () => {
                 Create Your Business
               </h1>
               <form
-              onSubmit={handleSubmit(onSubmit)}
+               onSubmit={handleSubmit(onSubmit)}
+            
                 className="space-y-4 md:space-y-6"
                 action="#"
                 // onSubmit={handleSubmit(onSubmit)}
