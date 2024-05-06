@@ -10,22 +10,22 @@ const CreateBusiness = () => {
   } = useForm();
 
   const onSubmit =async (data) => {
-    // const image = data.image[0]; // Get the uploaded image
+    const logo = data.image[0]; // Get the uploaded image
     const formData = new FormData();
-    formData.append("image", data.image[0]);
+    formData.append("logo", data.image[0]);
  
     console.log(formData);
-  
+ 
     const businessData = {
       name: data.name,
       email: data.email,
       phone: data.phone,
       country: data.country,
-      business_type:[ data.business],
+      business_type:JSON.stringify([data.business]) ,
       city: data.city,
       street: data.street,
       post_code: data.post_code,
-      //  logo: formData, // Pass formData directly
+       logo: logo, // Pass formData directly
     };
   
     console.log("business", businessData);
@@ -38,6 +38,7 @@ const CreateBusiness = () => {
           headers: {
             Authorization: `Bearer ${storedToken}`,
             "Content-Type": "multipart/form-data",
+            //  "Content-Type": "application/json",
           },
         }
       );
@@ -47,11 +48,9 @@ const CreateBusiness = () => {
     }
     console.log(data)
 
-}
+ 
 
-
-
-//   console.log(watch("example"))
+} 
 
   return (
     <div>
@@ -158,7 +157,7 @@ const CreateBusiness = () => {
                         Select Business Type
                       </option>
                       <option value="rs">rs</option>
-                      <option value="pf">pr</option>
+                      <option value="pr">pr</option>
                       <option value="at">at</option>
                       <option value="ap">ap</option>
                       <option value="ev">ev</option>
